@@ -1,0 +1,697 @@
+/*
+Theme Name: Eduma Child Devlive
+Theme URI: http://educationwp.thimpress.com/
+Template: eduma/eduma
+Author: ThimPress
+Author URI: https://thimpress.com
+Description: Premium WordPress LMS theme.
+Tags: two-columns,three-columns,left-sidebar,right-sidebar,custom-background,custom-header,custom-menu,editor-style,post-formats,rtl-language-support,sticky-post,theme-options,translation-ready,accessibility-ready
+Version: 3.5.3.1538549257
+Updated: 2018-10-03 06:47:37
+
+*/
+
+.course-author {
+display: none;
+}
+.course-comments-count{
+	display: none !important;
+}
+
+.widget_single-images{
+	display: none !important;
+}
+
+.thim-lp-pmpro-desc .description {
+    margin-bottom: 20px;
+    color: #888;
+    font-size: 12px;
+}
+
+
+
+.navigation .width-navigation .navbar-nav > li > a, .navigation .width-navigation .navbar-nav > li > span {
+    font-size: 14px !important;
+    font-weight: 400;
+}
+
+.thim-widget-icon-box .wrapper-box-icon {
+    position: relative;
+    z-index: 9;
+    text-align: center;
+}
+
+#d1 {
+    font-size:14px;
+    min-height: 360px;
+}
+
+.course-wishlist-box {
+
+    display: none !important;
+}
+
+.course-author{
+    display: none!important;
+}
+
+.course-review{
+    display: none!important;
+}
+
+.course-nav-tab-reviews{
+    display: none !important;
+}
+
+#toolbar {
+background-color: #353866;
+color: #AEAEAE;
+font-size: 14px;
+}
+
+#masthead.header_v5 .width-logo>a {
+margin-top: 0px;
+text-align: center;
+}
+
+.header_v5 .width-logo>a {
+background-color: #2EC4B6;}
+
+.header_v5 .width-logo {
+width: 100px;
+}
+
+
+.sp-btn{
+    background: #2ec4b6 !important;
+    margin-left: 10px;
+    color: #fff !important;
+    border: 1px solid #2ec4b6 !important;
+    margin-top: 3px;
+    border-radius: 2px !important;
+    padding: 5px !important;
+}
+
+.thim-about-author .author-bio {
+    float: left !important;
+  
+}
+
+.author-avatar{
+    display: none !important;
+}
+
+.thim-lp-pmpro-desc .description {
+    margin-bottom: 20px;
+    font-size: 15px !important;
+    color: #000 !important;
+}
+
+.sc_heading {
+    position: relative;
+    margin: 0 0 20px;
+    padding-top: 42px;
+    padding-bottom: 0px !important;
+}
+
+.sc_heading .sub-heading {
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+    line-height: 30px;
+    color: #999;
+   
+}
+
+.thim-lp-pmpro-desc {
+    max-width: 430px;
+    margin: auto;
+    text-align: center !important;
+        min-height: 235px;
+}
+.menu-right{
+	display: none !important;
+}
+
+footer#colophon.thim-footer-new-eduma .footer {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+
+.sc_heading {
+
+   
+    padding-top: 20px !important;
+  
+}
+
+.thim-testimonial-slider .slides-content .description {
+    margin-top: 0px !important
+    ;
+}
+
+.wpb_image_grid .wpb_image_grid_ul .isotope-item {
+
+    border: 5px solid;
+}
+
+/*#masthead.header_v5 .width-logo>a {
+    margin-top: -40px;
+    text-align: center;
+    width: 130px;
+}
+*/
+.textwidget>span{
+    margin-left: 15px;
+}
+
+/*#masthead.header_v5 .width-logo>a img {
+    margin-top: 0px !important;
+    margin-bottom: 15px;
+}
+*/
+#masthead.header_v5 .width-logo>a img {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    width: 100%;
+}
+.join{
+        color: #00d637 !important;
+}
+.header_v5 .width-logo>a{
+        background-color: transparent !important;
+}
+
+.label {
+
+    font-size: 12px;
+ 
+}
+
+.line-1{
+        border: none;
+    background: rgba(0,0,0,.1);
+    height: 2px;
+    margin: 1px 0;
+    width: 30px;
+    margin: 0 auto;
+}
+
+.line-2{
+    border: none;
+    background: rgba(0,0,0,.1);
+    height: 1px;
+    margin: 0px 0;
+}
+
+.header_v5 .navigation .navbar-nav {
+    position: relative;
+    padding-right: 0px !important;
+}
+
+@media (max-width: 1400px) and (min-width: 1025px){
+.header_v5 .navigation .navbar-nav {
+position: relative;
+padding-right: 0px !important;
+}
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+#toolbar .mail, #toolbar .newsocial {
+
+display: none;
+}
+
+#toolbar {
+	padding-bottom: 1.5%!important;
+}
+.thim-course-carousel .owl-buttons {
+top: -40px;
+right: auto;
+left: 5px;
+margin-top: 30px;
+}
+.movemenu ul {
+margin-left: 0px !important;
+
+}
+
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+#pg-8618-1{
+margin-top: 10px;
+}
+
+#toolbar {
+
+display: none;
+}
+.movemenu ul {
+margin-left: 0px !important;
+
+} 
+
+#offer{
+	display: none;
+} 
+
+#pg-9979-2> .panel-row-style {
+    background-color: #353866;
+    margin-top: -110px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	.movemenu ul {
+margin-left: 0px !important;
+
+} 
+
+
+#offer{
+	display: none;
+} 
+
+#pg-9979-2> .panel-row-style {
+    background-color: #353866;
+    margin-top: -110px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+#toolbar {
+
+display: block;
+}
+.movemenu ul {
+margin-left: 225px !important;
+
+} 
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+#toolbar {
+
+display: block;
+}
+.movemenu ul {
+margin-left: 225px !important;
+
+} 
+
+} 
+
+
+/*.movemenu ul {
+margin-left: 225px !important;
+
+} */
+
+.copyright-content a {
+    padding: 0px 6px 0px 6px;
+    /* padding-right: 11px; */
+    font-size: 13px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    /* border-radius: 50%; */
+    border-right: 1px solid #ffffff2e;
+}
+
+.custom-html-widget a {
+  padding: 10px;
+  font-size: 15px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none !important;
+  
+}
+
+.custom-html-widget a:hover {
+  padding: 10px;
+  font-size: 15px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  
+}
+
+
+
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  color: #7a8aaa !important;
+}
+
+.fa-twitter {
+
+  color: #1da1f2 !important;
+}
+
+.fa-linkedin {
+
+  color: #007bb5 !important;
+}
+
+
+.fa-pinterest {
+
+  color:  #bd081c !important;
+}
+.sc{
+	margin-right: 70px
+}
+
+.fa-youtube-play{
+	color: red;
+}
+
+.red{
+	color:red !important;
+}
+
+.so-widget-sow-image-default-bd5cd9da0588 .sow-image-container .so-widget-image {
+    display: block;
+    max-width: 100%;
+    width: inherit;
+    height: auto;
+    margin-top: -20px;
+}
+
+footer#colophon.thim-footer-new-eduma p {
+    margin-bottom: 5px;
+    line-height: 24px;
+}
+.navigation .width-navigation .navbar-nav > li > a, .navigation .width-navigation .navbar-nav > li > span {
+    font-size: 16px;
+    font-weight: 300 !important;
+
+}
+
+
+
+/*#pg-9889-1{
+    position: relative;
+}*/
+
+
+@media (max-width: 767px){
+#masthead .navigation {
+    padding-top: 10px;
+    padding-bottom: 15px !important;
+}
+}
+
+
+
+/*#data1{ height: 100px; width: 100px; position: absolute; left: -100px;}*/
+
+
+
+tr{
+	text-align: center;
+}
+td{
+	text-align: center;
+}
+
+.blk{
+	
+    background: #2cccee;
+
+}
+
+.blk2{
+    background: #a1ca9d;
+}
+
+
+.blk22{
+background: #78b271;
+color: #fff;
+}
+
+/*.snp-bld-step-cont.snp-bld-center {
+    top: 74%;
+    left: 16%;
+  
+}*/
+
+
+.snp-bld-step-cont.snp-bld-bottom-left {
+    bottom: 131px;
+    left: 38%;
+}
+
+.post-formats-wrapper {
+    overflow: hidden;
+    margin-bottom: 30px;
+    width: 100%;
+    height: 500px;
+}
+
+
+.so-widget-sow-image-default-bd5cd9da0588 .sow-image-container .so-widget-image {
+    display: block;
+    max-width: 100%;
+    width: inherit;
+    height: auto;
+        margin-top: -16px;
+    margin-bottom: -10px;
+    margin-left: -19px;
+    }
+
+    #masthead.header_v5 .width-logo>a img {
+    margin-top: 55px !important;
+    margin-bottom: 15px !important;
+    margin-left: 16px;
+}
+
+.author{
+	display: none !important;
+}
+
+.thim-about-author{
+	display: none !important;
+}
+body.home-page .thim-video-box .video-container {
+    background: none !important;
+    padding: 15px 0px 0px 0px;
+}
+body.home-page .thim-video-box .video-container .video {
+	border:none;
+}
+#multi-step-form[data-wizardid="1"] .fw-step-block {
+    margin-bottom: 10px !important;
+}
+* {
+  box-sizing: border-box;
+}
+
+.columns {
+  float: left;
+  width: 33.3%;
+  padding: 8px;
+}
+
+
+.price {
+  list-style-type: none;
+  border: 1px solid #eee;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.price:hover {
+  box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+}
+
+.price .header {
+  background-color: #111;
+  color: white;
+  font-size: 25px;
+}
+
+.price li {
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  text-align: center;
+  list-style: none;
+}
+
+.price .grey {
+  background-color: #eee;
+  font-size: 20px;
+}
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+}
+.info_wrapp .nav-pills > li > a.nav_link::after {
+    background-color: #000;
+    content: "";
+    height: 100%;
+    left: 111%;
+    position: absolute;
+    top: 0;
+    width: 1px;
+}
+.info_wrapp .tab-pane {
+    border-top: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
+    height: 611px;
+    margin-top: 11px;
+}
+.courselist{
+	    margin-top: 23px;
+    margin-left: 28px;
+}
+.quizlist{
+	    margin-top: 23px;
+    margin-left: 28px;
+}
+.availabledates{
+	margin-top: 0px;
+	/*margin-top: 24px;*/
+    margin-left: 0px;
+}
+.availabledates li{
+	
+list-style: none;
+    padding-right: 17px;
+  
+    border-bottom: 1px solid;
+    font-size: 18px;
+    padding: 5px 10px;
+}
+.enrolltime{
+	float:right;
+}
+.notenroll{
+	background: #f50000;
+    color: #fff;
+}
+.notenrollcommon{
+	background: #f5d700;
+    color: #fff;
+}
+.enroll fa{
+	padding-right:5px;
+}
+.notenroll fa{
+	padding-right:5px;
+}
+.subjectdetails{
+width: 50%;
+    float: left;
+    text-align: left;
+}
+.studentdetailsnew{
+	
+	float: right;
+    text-align: right;
+    width: 48%;
+
+}
+.studentdetailsnew input{
+	border: none;
+    padding: 1px;
+    box-shadow: none;
+    text-shadow: none;
+        text-align: right;
+	
+}
+.studentdetailsnew .intl-tel-input{
+	    width: 72%;
+}
+.studentdetailsnew .flag-container{
+	display:none;
+}
+.enrolldates .fa-calendar{
+	padding-right: 5px;
+    
+    font-weight: bold;
+}
+.leaveindicate{
+	 width: 23px;
+    height: 23px;
+    border: 1px solid;
+    color: red;
+    background: red;
+    display: inline-block;
+}
+
+.holidayindicate{
+	 width: 23px;
+    height: 23px;
+    border: 1px solid;
+    color: #f5d700;
+    background: #f5d700;
+    display: inline-block;
+}
+.variation-DateTime{
+	text-align: justify;
+}
+#learn-press-course-curriculum ul.curriculum-sections .section-header {
+	margin: 12px 0 6px!important;
+}
+@media only screen and (max-width: 800px) and (min-width: 450px){
+.info_wrapp {
+    width: 82% !important;
+}
+}
+@media only screen and (max-width: 600px) {
+  .columns {
+    width: 100%;
+  }
+}
+div.day-number	 { 
+	background:#999; 
+	position:absolute; 
+	z-index:2; 
+	top:-5px; 
+	right:-25px; 
+	padding:5px; 
+	color:#fff; 
+	font-weight:bold; 
+	width:20px; 
+	text-align:center; 
+}
+td.calendar-day, td.calendar-day-np { 
+	width:120px; 
+	padding:5px 25px 5px 5px; 
+	border-bottom:1px solid #999; 
+	border-right:1px solid #999; 
+}

@@ -1,0 +1,569 @@
+<?php
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
+
+// BEGIN ENQUEUE PARENT ACTION
+// AUTO GENERATED - Do not modify or remove comment markers above or below:
+function enqueue_styles()
+{
+    wp_deregister_style('thim-style-options');
+    wp_register_style( 'thim-style-options', trailingslashit( get_template_directory_uri() ) . 'autoptimize.css', array(  ),11 );
+    wp_enqueue_style('thim-style-options') ;
+}
+add_action('wp_enqueue_scripts' , 'enqueue_styles', 1111);
+
+if ( !function_exists( 'chld_thm_cfg_parent_css' ) ):
+    function chld_thm_cfg_parent_css() {
+        wp_enqueue_style( 'chld_thm_cfg_parent', trailingslashit( get_template_directory_uri() ) . 'style.css', array(  ) );
+
+    }
+endif;
+add_action( 'wp_enqueue_scripts', 'chld_thm_cfg_parent_css', 1001 );
+
+// END ENQUEUE PARENT ACTION
+function renameToSubscribe($content) {
+    //return "<a class='join' href='https://bitwise.academy/bitwise/register/'>Join Now</a> ";
+    return '';
+}
+//To buy a course:
+add_filter("learn_press_course_price_html_free",'renameToSubscribe');
+
+//To add joined after student count
+function renameToJoined($enrolled) {
+   
+    return $enrolled.' Joined';
+}
+add_filter("learn_press_count_users_enrolled",'renameToJoined');
+
+
+/* Lectures to  Lessons change */
+
+if ( ! function_exists( 'thim_course_info' ) ) {
+    function thim_course_info() {
+        $course    = LP()->global['course'];
+        $course_id = get_the_ID();
+
+        $course_skill_level = get_post_meta( $course_id, 'thim_course_skill_level', true );
+        $course_language    = get_post_meta( $course_id, 'thim_course_language', true );
+	    $course_duration    = get_post_meta( $course_id, 'thim_course_duration', true );
+
+        ?>
+        <div class="thim-course-info">
+            <h3 class="title"><?php esc_html_e( 'Course Features', 'eduma' ); ?></h3>
+            <ul>
+                <li class="lectures-feature">
+                    <i class="fa fa-files-o"></i>
+                    <span class="label"><?php esc_html_e( 'Lessons', 'eduma' ); ?></span>
+                 <span class="value"><?php echo $course->get_curriculum_items('lp_lesson') ? count( $course->get_curriculum_items('lp_lesson') ) : 0; ?></span>
+                </li>
+                <li class="quizzes-feature">
+                    <i class="fa fa-puzzle-piece"></i>
+                    <span class="label"><?php esc_html_e( 'Quizzes', 'eduma' ); ?></span>
+                    <span class="value"><?php echo count( $course->get_curriculum_items('lp_lesson') ); ?></span>
+                </li>
+                <?php if ( ! empty( $course_duration ) ): ?>
+                    <li class="duration-feature">
+                        <i class="fa fa-clock-o"></i>
+                        <span class="label"><?php esc_html_e( 'Duration', 'eduma' ); ?></span>
+                        <span class="value"><?php echo $course_duration; ?></span>
+                    </li>
+                <?php endif; ?>
+                <?php if ( ! empty( $course_skill_level ) ): ?>
+                    <li class="skill-feature">
+                        <i class="fa fa-level-up"></i>
+                        <span class="label"><?php esc_html_e( 'Skill level', 'eduma' ); ?></span>
+                        <span class="value"><?php echo esc_html( $course_skill_level ); ?></span>
+                    </li>
+                <?php endif; ?>
+                <?php if ( ! empty( $course_language ) ): ?>
+                    <li class="language-feature">
+                        <i class="fa fa-language"></i>
+                        <span class="label"><?php esc_html_e( 'Language', 'eduma' ); ?></span>
+                        <span class="value"><?php echo esc_html( $course_language ); ?></span>
+                    </li>
+                <?php endif; ?>
+                <li class="students-feature">
+                    <i class="fa fa-users"></i>
+                    <span class="label"><?php esc_html_e( 'Students', 'eduma' ); ?></span>
+                    <?php $user_count = $course->get_users_enrolled() ? $course->get_users_enrolled() : 0; ?>
+                    <span class="value"><?php echo esc_html( $user_count ); ?></span>
+                </li>
+                <?php thim_course_certificate( $course_id ); ?>
+                <li class="assessments-feature">
+                    <i class="fa fa-check-square-o"></i>
+                    <span class="label"><?php esc_html_e( 'Assessments', 'eduma' ); ?></span>
+                    <span class="value"><?php echo ( get_post_meta( $course_id, '_lp_course_result', true ) == 'evaluate_lesson' ) ? esc_html__( 'Yes', 'eduma' ) : esc_html__( 'Self', 'eduma' ); ?></span>
+                </li>
+            </ul>
+            <?php do_action( 'thim_after_course_info' ); ?>
+        </div>
+        <?php
+    }
+}
+
+/* free to Subscribe Now*/
+
+
+if ( ! function_exists( 'thim_related_courses' ) ) {
+    function thim_related_courses() {
+        $related_courses = thim_get_related_courses( 5 );
+        $theme_options_data = get_theme_mods();
+        $style_content = isset($theme_options_data['thim_layout_content_page']) ? $theme_options_data['thim_layout_content_page'] : 'normal';
+
+        if ( $related_courses ) {
+            $layout_grid = get_theme_mod('thim_learnpress_cate_layout_grid', '');
+            $cls_layout = ($layout_grid!='' && $layout_grid!='layout_courses_1') ? ' cls_courses_2' : ' ';
+            ?>
+            <div class="thim-ralated-course <?php echo $cls_layout;?>">
+
+                <?php if( $style_content == 'new-1' ) {?>
+                    <div class="sc_heading clone_title  text-left">
+                        <h2 class="title"><?php esc_html_e( 'You May Like', 'eduma' ); ?></h2>
+                        <div class="clone"><?php esc_html_e( 'You May Like', 'eduma' ); ?></div>
+                    </div>
+                <?php } else {?>
+                    <h3 class="related-title">
+                        <?php esc_html_e( 'You May Like', 'eduma' ); ?>
+                    </h3>
+                <?php }?>
+
+                <div class="thim-course-grid">
+                    <div class="thim-carousel-wrapper" data-visible="3" data-itemtablet="2" data-itemmobile="1" data-pagination="1">
+                        <?php foreach ( $related_courses as $course_item ) : ?>
+                            <?php
+                            $course = learn_press_get_course( $course_item->ID );
+                            $is_required = $course->is_required_enroll();
+                            ?>
+                            <article class="lpr_course">
+                                <div class="course-item">
+                                    <div class="course-thumbnail">
+                                        <a class="thumb" href="<?php echo get_the_permalink( $course_item->ID ); ?>">
+                                            <?php
+                                            if ( $layout_grid!='' && $layout_grid!='layout_courses_1' ) {
+                                                echo thim_get_feature_image( get_post_thumbnail_id( $course_item->ID ), 'full', 320, 220, get_the_title( $course_item->ID ) );
+                                            } else {
+                                                echo thim_get_feature_image( get_post_thumbnail_id( $course_item->ID ), 'full', 450, 450, get_the_title( $course_item->ID ) );
+                                            }
+                                            ?>
+                                        </a>
+                                        <?php do_action( 'thim_inner_thumbnail_course' ); ?>
+                                        <?php echo '<a class="course-readmore" href="' . esc_url( get_the_permalink( $course_item->ID ) ) . '">' . esc_html__( 'Read More', 'eduma' ) . '</a>'; ?>
+                                    </div>
+                                    <div class="thim-course-content">
+                                        <div class="course-author">
+                                            <?php echo get_avatar( $course_item->post_author, 40 ); ?>
+                                            <div class="author-contain">
+                                                <div class="value">
+                                                    <a href="<?php echo esc_url( learn_press_user_profile_link( $course_item->post_author ) ); ?>">
+                                                        <?php echo get_the_author_meta( 'display_name', $course_item->post_author ); ?>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h2 class="course-title">
+                                            <a rel="bookmark"
+                                               href="<?php echo get_the_permalink( $course_item->ID ); ?>"><?php echo esc_html( $course_item->post_title ); ?></a>
+                                        </h2> <!-- .entry-header -->
+                                        <div class="course-meta">
+                                            <?php
+                                            $count_student = $course->get_users_enrolled() ? $course->get_users_enrolled() : 0;
+                                            ?>
+                                            <div class="course-students">
+                                                <label><?php esc_html_e( 'Students', 'eduma' ); ?></label>
+                                                <?php do_action( 'learn_press_begin_course_students' ); ?>
+
+                                                <div class="value"><i class="fa fa-group"></i>
+                                                    <?php echo esc_html( $count_student );?>
+                                                </div>
+                                                <?php do_action( 'learn_press_end_course_students' ); ?>
+
+                                            </div>
+                                            <?php thim_course_ratings_count( $course_item->ID ); ?>
+                                            <?php if ( $price = $course->get_price_html() ) {
+
+                                                $origin_price = $course->get_origin_price_html();
+                                                $sale_price   = $course->get_sale_price();
+                                                $sale_price   = isset( $sale_price ) ? $sale_price : '';
+                                                $class        = '';
+                                                if ( $course->is_free() || ! $is_required ) {
+                                                    $class .= ' free-course';
+                                                    $price = esc_html__( 'Join Now', 'eduma' );
+						}
+
+                                                ?>
+
+                                                <div class="course-price" itemprop="offers" itemscope
+                                                     itemtype="http://schema.org/Offer">
+                                                    <div class="value<?php echo $class; ?>" itemprop="price">
+                                                        <?php
+                                                        if ( $sale_price ) {
+                                                            echo '<span class="course-origin-price">' . $origin_price . '</span>';
+                                                        }
+                                                        ?>
+                                                        <?php echo $price; ?>
+                                                    </div>
+                                                    <meta itemprop="priceCurrency"
+                                                          content="<?php echo learn_press_get_currency(); ?>"/>
+                                                </div>
+                                                <?php
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+    }
+}
+add_filter( 'woocommerce_product_add_to_cart_text' , 'custom_woocommerce_product_add_to_cart_text_cart' );
+function custom_woocommerce_product_add_to_cart_text_cart($content){
+    global $product;
+    $product_in_cat = has_term( 'in-person-course', 'product_cat', $product->id );
+    return ($product_in_cat)? 'Join Now' : $content;
+}
+add_filter( 'woocommerce_product_single_add_to_cart_text' , 'custom_woocommerce_product_add_to_cart_text' );
+function custom_woocommerce_product_add_to_cart_text($content){
+    global $product;
+    $product_in_cat = has_term( 'in-person-course', 'product_cat', $product->id );
+    return ($product_in_cat)? "Join Now" : $content;
+
+
+}
+/**
+ * Add a custom product data tab
+ */
+add_filter( 'woocommerce_product_tabs', 'woo_new_product_tab' );
+
+function woo_new_product_tab( $tabs ) {
+    global $product;
+    $product_in_cat = has_term( 'in-person-course', 'product_cat', $product->id );
+
+    if($product_in_cat) {
+         // Adds the new tab
+        $tabs['curriculum_tab'] = array(
+            'title'     => __( 'Curriculum', 'woocommerce' ),
+            'priority'  => 50,
+            'callback'  => 'woo_curriculum_product_tab_content'
+        );
+        // Adds the new tab
+        /*$tabs['instructor_tab'] = array(
+            'title'     => __( 'Instructor', 'woocommerce' ),
+            'priority'  => 60,
+            'callback'  => 'woo_instructor_product_tab_content'
+    );*/
+     
+    }
+    return $tabs;
+}
+function woo_curriculum_product_tab_content() {
+    // The Curriculum tab content
+   
+
+            $c1 = "/product/introduction-to-data-science-and-statistics-live-course/";
+       
+            
+            $currentpage = $_SERVER['REQUEST_URI'];
+            
+            if($c1==$currentpage)
+             {
+         echo '<h2>Curriculum</h2>';
+    echo '<hr style="margin:-10px;"><br><p><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">1</span><strong style="color:#000;padding:0px 0px 0px 25px;">Exploring Statistics</strong></p>
+
+    <hr style="margin:-10px;"><br><p><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">2</span><strong style="color:#000;padding:0px 0px 0px 25px;">Research Design</strong></p>
+
+    <hr style="margin:-10px;"><br><p><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">3</span><strong style="color:#000;padding:0px 0px 0px 25px;">Probability</strong></p>
+
+    <hr style="margin:-10px;"><br><p><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">4</span><strong style="color:#000;padding:0px 0px 0px 25px;">Normal Distributions</strong></p>
+
+    <hr style="margin:-10px;"><br><p><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">5</span><strong style="color:#000;padding:0px 0px 0px 25px;">Sampling Distributions</strong></p>
+
+    <hr style="margin:-10px;"><br><p><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">6</span><strong style="color:#000;padding:0px 0px 0px 25px;">Estimation</strong></p>
+
+    <hr style="margin:-10px;"><br><p><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">7</span><strong style="color:#000;padding:0px 0px 0px 25px;">Tests of Significance</strong></p>
+
+    <hr style="margin:-10px;"><br><p><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">8</span><strong style="color:#000;padding:0px 0px 0px 25px;">Regression</strong></p>
+
+    <hr style="margin:-10px;"><br><p><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">9</span><strong style="color:#000;padding:0px 0px 0px 25px;">Introduction to Data Science</strong></p>
+
+    <hr style="margin:-10px;"><br><p><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">10</span><strong style="color:#000;padding:0px 0px 0px 25px;">Introduction to Machine Learning</strong></p>'; 
+            }
+      
+            else{
+             echo '<h2>Curriculum</h2>';
+    echo '  <div class="panel-group">
+    <div class="panel panel-default" style="margin: 0 0 0em;padding: 0;">
+      <div class="panel-heading" style="color: #333;background-color: #FFF;border-color: #DDD;">
+        <h4 class="panel-title">
+          <hr style="margin:-10px;"><br><a  data-toggle="collapse" href="#collapse1"><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">1</span><strong style="color:#000;padding:0px 0px 0px 25px;">Object-Oriented Program Design</strong></a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <ul class="list-group" style="list-style: none;">
+          <li class="list-group-item pd-lf-100" style="list-style: none;padding-left:100px;"><strong>1.1</strong> Program and class design</li>
+        </ul>
+      </div>
+    </div>
+        <div class="panel panel-default" style="margin: 0 0 0em;padding: 0;">
+      <div class="panel-heading" style="color: #333;background-color: #FFF;border-color: #DDD;">
+        <h4 class="panel-title">
+          <hr style="margin:-10px;"><br><a  data-toggle="collapse" href="#collapse2"><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">2</span><strong style="color:#000;padding:0px 0px 0px 25px;">Program Implementation</strong></a>
+        </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+        <ul class="list-group" style="list-style: none;">
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>2.1</strong> Implementation techniques</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>2.2</strong> Programming constructs</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>2.3</strong>  Java library classes and interfaces included in the
+AP Java Subset</li>
+        </ul>
+      </div>
+    </div>
+    <div class="panel panel-default" style="margin: 0 0 0em;padding: 0;">
+      <div class="panel-heading" style="color: #333;background-color: #FFF;border-color: #DDD;">
+        <h4 class="panel-title">
+          <hr style="margin:-10px;"><br><a  data-toggle="collapse" href="#collapse3"><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">3</span><strong style="color:#000;padding:0px 0px 0px 25px;">Program Analysis</strong></a>
+          
+        </h4>
+      </div>
+      <div id="collapse3" class="panel-collapse collapse">
+        <ul style="list-style: none;" class="list-group">
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>3.1</strong> Testing</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>3.2</strong> Debugging</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>3.3</strong> Runtime exceptions</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>3.4</strong> Program correctness</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>3.5</strong> Algorithm analysis</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>3.6</strong> Numerical representations of integers</li>
+        </ul>
+      </div>
+    </div>
+      <div class="panel panel-default" style="margin: 0 0 0em;padding: 0;">
+      <div class="panel-heading" style="color: #333;background-color: #FFF;border-color: #DDD;">
+        <h4 class="panel-title">
+          <hr style="margin:-10px;"><br><a  data-toggle="collapse" href="#collapse4"><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">4</span><strong style="color:#000;padding:0px 0px 0px 25px;">Standard Data Structures</strong></a>
+        </h4>
+      </div>
+      <div id="collapse4" class="panel-collapse collapse">
+        <ul style="list-style: none;" class="list-group">
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>4.1</strong> Primitive data types (int, boolean, double)</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>4.2</strong> Strings</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>4.3</strong> Classes</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>4.4</strong> Lists</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>4.5</strong> Arrays (1-dimensional and 2-dimensional)</li>
+        </ul>    
+      </div>
+    </div>
+    <div class="panel panel-default" style="margin: 0 0 0em;padding: 0;">
+      <div class="panel-heading" style="color: #333;background-color: #FFF;border-color: #DDD;">
+        <h4 class="panel-title">
+          <hr style="margin:-10px;"><br><a  data-toggle="collapse" href="#collapse5"><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">5</span><strong style="color:#000;padding:0px 0px 0px 25px;">Standard Operations and Algorithms</strong></a>
+        </h4>
+      </div>
+      <div id="collapse5" class="panel-collapse collapse">
+        <ul style="list-style: none;" class="list-group">
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>5.1</strong> Operations on data structures</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>5.2</strong> Searching</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>5.3</strong> Sorting</li>
+        </ul>
+      </div>
+    </div>
+      <div class="panel panel-default" style="margin: 0 0 0em;padding: 0;">
+      <div class="panel-heading" style="color: #333;background-color: #FFF;border-color: #DDD;">
+        <h4 class="panel-title">
+          <hr style="margin:-10px;"><br><a  data-toggle="collapse" href="#collapse6"><span class="fa fa-file-o" style="color:#ffb606;"> </span><span style="font-size:10px;color:#999;padding:0px 5px 0px 10px;">Lesson</span><span style="font-size:13px;">6</span><strong style="color:#000;padding:0px 0px 0px 25px;">Computing in Context</strong></a>
+        </h4>
+      </div>
+      <div id="collapse6" class="panel-collapse collapse">
+        <ul style="list-style: none;" class="list-group">
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>6.1</strong> System reliability</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>6.2</strong> Privacy</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>6.3</strong> Legal issues and intellectual property</li>
+          <li style="list-style: none;padding-left:100px;" class="list-group-item pd-lf-100"><strong>6.4</strong> Social and ethical ramifications of computer use</li>
+        </ul>
+      </div>
+    </div>
+  </div>';
+            }
+
+
+
+
+}
+function woo_instructor_product_tab_content() {
+    // The Instructor tab content
+     
+            $c1 = "/product/";
+            $c2 = "/product/ap-computer-";
+            
+            $currentpage = $_SERVER['REQUEST_URI'];
+            
+            if($c1==$currentpage)
+             {
+            // echo '<h2>Instructor</h2>';
+    echo '<p><strong style="color:#000;">G Venkat is the instructor for the AP Computer Science course.</strong>  He is a well-regarded Scientist, Researcher, and Corporate Executive with over 25 years of industry experience.  He has taught computer science to students of all ages.  Venkat has undertaken research on grants awarded from NASA and served as an advisor and consultant to Fortune 1000 companies and startups. Venkat’s book on Java Modernization was published by McGraw-Hill in 2017 with the foreword written by Thomas Kurian, President, Oracle.  Venkat is regularly invited to present at JavaOne and Oracle Open World.  Venkat holds a B.Tech. degree in Aerospace Engineering from The Indian Institute of Technology (IIT-M), Madras, India, MS and Ph.D. (ABD) in Interdisciplinary Studies (Computer Science and Aerospace) from The University of Alabama, Tuscaloosa.</p>';
+            }
+            elseif ($c2==$currentpage) {
+                   // echo '<h2>Instructor</h2>';
+    echo '<p><strong style="color:#000;">G Venkat is the instructor for the AP Computer Science course.</strong>  He is a well-regarded Scientist, Researcher, and Corporate Executive with over 25 years of industry experience.  He has taught computer science to students of all ages.  Venkat has undertaken research on grants awarded from NASA and served as an advisor and consultant to Fortune 1000 companies and startups. Venkat’s book on Java Modernization was published by McGraw-Hill in 2017 with the foreword written by Thomas Kurian, President, Oracle.  Venkat is regularly invited to present at JavaOne and Oracle Open World.  Venkat holds a B.Tech. degree in Aerospace Engineering from The Indian Institute of Technology (IIT-M), Madras, India, MS and Ph.D. (ABD) in Interdisciplinary Studies (Computer Science and Aerospace) from The University of Alabama, Tuscaloosa.</p>';
+            }
+            else{
+             // echo '<h2>Instructor</h2>';
+    echo '<p><strong style="color:#000;">G Venkat</strong> is a well-regarded Scientist, Researcher, Educator, and Corporate Executive with over 25 years of industry experience. He has taught computer science to students of all ages. Venkat has undertaken research on grants awarded from NASA and served as an advisor and consultant to Fortune 1000 companies and startups. Venkat’s book on Java Modernization was published by McGraw-Hill in 2017 with the foreword written by Thomas Kurian, CEO of Google Cloud and ex-President, Oracle. Venkat is regularly invited to present at JavaOne and Oracle Open World. Venkat holds a B.Tech. degree in Aerospace Engineering from The Indian Institute of Technology (IIT-M), Madras, India, MS and Ph.D. (ABD) in Interdisciplinary Studies (Computer Science and Aerospace) from The University of Alabama, Tuscaloosa.</p>';
+            }
+     
+ 
+
+
+}
+
+
+$c1 = "https://bitwiseacademy.com";
+
+$currentpage = site_url();
+if($c1 === $currentpage)
+{
+add_action('wp_head', 'socialMedia_script');
+function socialMedia_script(){
+    ?>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115410368-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115410368-1');
+</script>
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '500785053666077');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=500785053666077&ev=PageView&noscript=1"
+/></noscript>
+    <?php 
+}
+}
+
+add_filter( 'woocommerce_add_to_cart_redirect', 'custom_add_to_cart_redirect', 9);
+function custom_add_to_cart_redirect() {
+    
+    // var_dump(print_r($content, true));exit;
+    //Get product ID
+    if ( isset( $_POST['add-to-cart'] ) ) {
+        // var_dump(print_r($_POST['add-to-cart'], true));exit;
+        $product_id = (int) apply_filters( 'woocommerce_add_to_cart_product_id', $_POST['add-to-cart'] );
+    
+        //Check if product ID is in the proper taxonomy and return the URL to the redirect product
+        // if ( has_term( 'in-person', 'course_category', $product_id ) )
+        if ( has_term( 'in-person-course', 'product_cat', $product_id ) )
+            return get_permalink( 9538 );
+        
+    }
+    
+    global $product;
+    $product_in_cat = has_term( 'in-person-course', 'product_cat', $product->id );
+
+    if ($product_in_cat) { 
+        return get_permalink( 9538 );
+    }
+}
+// To enquque our custom javascripts
+add_action('wp_enqueue_scripts', 'wdm_enqueue_scripts',10 , true);
+function wdm_enqueue_scripts()
+{
+    wp_enqueue_script('notify-me-script', get_stylesheet_directory_uri() . '/assets/js/notify-me-script.js');
+    $localize_data['action_function'] = "wdm_sendy_add_list_process";
+    wp_localize_script('notify-me-script', "ajax_data", $localize_data);
+}
+add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );
+ 
+function custom_override_checkout_fields( $fields ) {
+unset($fields['billing']['billing_company']);
+ 
+return $fields;
+}
+
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+
+//Change Buy this course to join now 
+add_filter( 'learn-press/course-external-link-text' , 'change_text' );
+function change_text( $text )
+{
+    return 'Join Now';
+}
+
+//get value from multiform
+add_action('msfp_register','form_values',3);
+function form_values($reg, $data, $id)
+{
+    error_log(var_dump($id));
+    error_log(var_dump($data));
+    error_log(var_dump($reg));
+
+   /* error_log(print_r($id, true));
+    error_log(print_r($data, true));
+    error_log(print_r($reg, true));*/
+    exit();
+}
+
+//Auto fill Checkout fields
+/*add_filter('woocommerce_checkout_get_value', function($input, $key ) {
+    global $current_user;
+    switch ($key) :
+        case 'billing_first_name':
+        case 'shipping_first_name':
+            return "vignesh";
+        break;
+        
+        case 'billing_last_name':
+        case 'shipping_last_name':
+            return "M";
+        break;
+        case 'billing_email':
+            return "vignesh2677@gmail.com";
+        break;
+        case 'billing_phone':
+            return "9597109700";
+        break;
+    endswitch;
+}, 10, 2);*/
+
+
+//to lock down the user enumeration
+if (!is_admin()) {
+// default URL format
+if (preg_match('/author=([0-9]*)/i', $_SERVER['QUERY_STRING'])) die();
+add_filter('redirect_canonical', 'shapeSpace_check_enum', 10, 2);
+}
+function shapeSpace_check_enum($redirect, $request) {
+// permalink URL format
+if (preg_match('/\?author=([0-9]*)(\/*)/i', $request)) die();
+else return $redirect;
+}
+//Block WordPress xmlrpc.php requests on function.php
+add_filter( 'xmlrpc_enabled', '__return_false' );
+function add_async_attribute($tag, $handle) {
+   // add script handles to the array below
+   $scripts_to_async = array('jquery-migrate.min.js', 'bootstrap-script');
+   
+   foreach($scripts_to_async as $async_script) {
+      if ($async_script === $handle) {
+         return str_replace(' src', ' async="async" src', $tag);
+      }
+   }
+   return $tag;
+}
+add_filter('script_loader_tag', 'add_async_attribute', 10, 2);
