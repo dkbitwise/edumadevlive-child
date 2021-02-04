@@ -1331,3 +1331,4 @@ function change_country_order_in_checkout_form( $countries ) {
 	return array( 'US' => $usa );
 	//return array('US' => $usa ) + $countries;
 }
+remove_action( 'fep_footer_note', 'fep_footer_credit' );
